@@ -1,0 +1,36 @@
+create database social_media;
+
+# i have created 2 tables in social_media database named as users and posts.
+
+use social_media;
+create table users(
+	id integer primary key auto_increment,
+    name varchar(50),
+    profile varchar(50),
+    password varchar(50),
+    headline varchar(50),
+    token varchar(50)
+
+);
+create table posts(
+	profile varchar(50),
+    content varchar(5000),
+    likes integer,
+    shares integer
+);
+
+# insert into users tabel
+
+insert into users(name,profile,password,headline,token)
+values('giridhar','giridhar_123','99890','fullStack','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.36POk'),
+('karthik', 'karthik_123', '54312', 'Data Analyst','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.36POk');
+
+select * from users;
+
+# insert into posts tabel
+
+insert into posts(profile,content,likes,shares)
+values('giridhar_123','Information Technology (IT) plays a vital role in todays personal, commercial, and not-for-profit uses. In its simplest terms, IT is the application of computers and other electronic equipment to receive, store, retrieve, transmit, and manipulate data.',67,15),
+('karthik_123','The information technology industry, also known as the tech industry, is a sector that includes companies that develop and manufacture technology products, provide technology services, and offer digital solutions.',89,45);
+
+select * from posts;

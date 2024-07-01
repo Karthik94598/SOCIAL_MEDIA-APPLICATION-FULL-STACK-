@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Posts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-light bg-primary">
+        <a class="navbar-brand" href="#" style="color: rgb(255, 255, 255);">
+            <img src="/public/linkedin logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Hello App
+        </a>
+    </nav>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{userInfo.name}}</h3>
+                        <p>@{{userInfo.profile}}</p>
+                        <p class="card-text">{{userInfo.headline}}</p>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary m-3" data-toggle="modal"
+                            data-target="#exampleModal" data-whatever="@mdo">+ Create Post</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Let's create a post</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/addpost" method="post">
+                                            <div class="form-group">
+                                                <input type="hidden" name="profile" value="{{userInfo.profile}}">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" name="content"
+                                                    id="message-text"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Send post</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mb-4">
+                {{#each data}}
+                <div class="card m-2">
+                    <div class="d-flex text-body-secondary pt-3 ml-3">
+                        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+                                dy=".3em">32x32</text>
+                        </svg>
+                        <p class="pb-3 mb-0 small lh-sm border-bottom">
+                            <strong class="d-block text-gray-dark">@{{profile}}</strong>
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{content}}</p>
+                    </div>
+                    <span class="m-3">
+                        <form action="/like" method="post">
+                            <input type="hidden" name="content" value="{{content}}">
+                            <button type="submit" class="btn btn-danger">like</button>
+                        </form>
+                        <button type="button" disabled class="btn btn-primary">{{likes}}</button>
+                        <form action="/share" method="post">
+                            <input type="hidden" name="content" value="{{content}}">
+                            <button type="submit" class="btn btn-success">Share</button>
+                        </form>
+                        <button type="button" disabled class="btn btn-primary">{{shares}}</button>
+                        <form action="/del" method="post">
+                            <input type="hidden" name="content" value="{{content}}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </span>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
